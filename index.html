@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.2, minimum-scale=0.2, maximum-scale=1.0, user-scalable=yes" />
+        <link rel="bookmark" href="<%=weburl%>images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="<%=weburl%>images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="<%=weburl%>images/favicon.ico" type="image/x-icon" />
+        <title>湖南医保平台项目建设管理调度平台(PMSP)</title>
+
+        <script type="text/javascript">
+            if (top != self) {
+                top.location = self.location;
+            }
+
+            function $(id) {
+                return document.getElementById(id);
+            }
+
+            function check() {
+                var username = $("username");
+                var password = $("password");
+                var msg = $("msg");
+                username.value = username.value.trim();
+                if (username.value == "") {
+                    msg.style.display = "block";
+                    msg.innerHTML = "提示：请输入帐号！";
+                    username.focus();
+                    return false;
+                }
+                if (password.value == "") {
+                    msg.style.display = "block";
+                    msg.innerHTML = "提示：请输入密码！";
+                    password.focus();
+                    return false;
+                }
+                //$("submit").disabled = true;
+                return true;
+            }
+
+            function checkParent() {
+                var obj = window.dialogArguments;
+                if (obj != null || typeof(obj) != 'undefined') {
+                    $("zf").submit();
+                    window.close();
+                }
+                if (window.parent.length > 0) {
+                    window.parent.location = "${ctx}/login.do";
+                }
+                $("username").focus();
+            }
+            String.prototype.trim = function() {
+                return this.replace(/(^\s*)|(\s*$)/g, "");
+            };
+
+            function getCookie(objName) { //获取指定名称的cookie的值
+                var arrStr = document.cookie.split("; ");
+                for (var i = 0; i < arrStr.length; i++) {
+                    var temp = arrStr[i].split("=");
+                    if (temp[0] == objName) {
+                        return unescape(temp[1]);
+                    }
+                }
+            }
+
+            function initUsername() {
+                var username = getCookie("mprcm_login_id");
+                if (username) {
+                    $("username").value = username;
+                    $('password').focus();
+                } else {
+                    $('username').focus();
+                }
+            }
+        </script>
+        <style type="text/css">
+            #err_msg,
+            .msg {
+                color: #000000;
+                margin: 10px 0;
+                padding: 6px 6px 6px 26px;
+                font-size: 9pt;
+            }
+
+            #err_msg {
+                background: url("${ctx}/images/icons/error.gif") no-repeat scroll 6px 6px #F7DB7B;
+                border: 1px solid #FF0000;
+            }
+
+            .msg {
+                background: url("${ctx}/images/icons/exclamation.gif") no-repeat scroll 6px 6px #E0EFFF;
+                border: 1px solid #9EB6D4;
+            }
+
+            .txt {
+                font-size: 14px;
+                color: #222;
+                width: 50%;
+                text-align: right;
+                white-space: nowrap;
+            }
+
+            /* 禁止页面元素被选中 */
+            * {
+                moz-user-select: -moz-none;
+                -moz-user-select: none;
+                -o-user-select: none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                /* overflow: hidden; */
+            }
+
+
+            input {
+                outline: none;
+            }
+
+            .containner {
+                min-width: 960px;
+                height: 100%;
+                padding: 70px 0 0 0;
+                box-sizing: border-box;
+                background: linear-gradient(135deg, rgba(49, 156, 238, 1) 0%, rgba(32, 110, 232, 1) 100%);
+                /*IE<9>*/
+                filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#319CEE, endColorstr=#206EE8);
+                /*IE8+*/
+                -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#319CEE, endColorstr=#206EE8)";
+            }
+
+            .content {
+                min-width: 926px;
+                width: 77%;
+                max-width: 1471px;
+                height: 93%;
+                max-height: 811px;
+                margin: 0 auto;
+                background: #fff;
+            }
+
+            .content::after {
+                content: "";
+                clear: both;
+            }
+
+            .content h1 {
+                line-height: 120px;
+                margin: 0;
+                font-size: 26px;
+                font-family: "微软雅黑";
+                font-weight: 400;
+                text-align: center;
+                color: rgba(51, 51, 51, 1);
+            }
+
+            .content img {
+                float: left;
+                display: block;
+                /* width: 590px; */
+                width: 40%;
+                max-width: 590px;
+                margin: 0 0 0 98px;
+            }
+
+            .content .loginArea {
+                position: relative;
+                float: right;
+                min-width: 356px;
+                width: 30.5%;
+                max-width: 450px;
+                /* min-height: 406px; */
+                margin: 38px 10% 0 0;
+                padding: 0 3%;
+                /* padding: 0 9%; */
+                background: #fff;
+                box-shadow: 0px 8px 15px 1px rgba(230, 230, 230, 0.5);
+                border-radius: 6px;
+                box-sizing: border-box;
+            }
+
+            .content .loginArea h5 {
+                margin: 73px 0 30px 0;
+                font-size: 20px;
+                font-weight: 500;
+                color: #333;
+            }
+
+            .content .loginArea input {
+                display: block;
+                width: 100%;
+                height: 40px;
+                margin: 0 0 18px 0;
+                padding: 0 12px;
+                border: 0;
+                color: #333;
+                background-color: #F5F5F5;
+                /* filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#F5F5F5,endcolorstr=#F5F5F5); */
+            }
+
+            .content .loginArea input[type="submit"] {
+                /* margin: 18px 0 91px 0; */
+                margin: 18px 0 24% 0;
+                cursor: pointer;
+                color: #fff;
+                background: #337DF7;
+            }
+
+            .content .loginArea input[type="submit"]:active {
+                background: #5183d6;
+            }
+
+            .content .loginArea .checkbox-group {
+                position: relative;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 500;
+                color: #999;
+            }
+
+            .content .loginArea .checkbox-group input[type="checkbox"] {
+                width: 14px;
+                height: 14px;
+                display: inline-block;
+                text-align: center;
+                line-height: 18px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .content .loginArea .checkbox-group input[type="checkbox"]::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: #fff;
+                width: 100%;
+                height: 100%;
+                border: 1px solid #d9d9d9;
+                box-sizing: border-box;
+            }
+
+            .content .loginArea .checkbox-group input[type="checkbox"]:checked::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                border: 1px solid #337DF7;
+                background: #337DF7;
+            }
+
+            .content .loginArea .checkbox-group input[type="checkbox"]:checked::after {
+                content: "\2713";
+                position: absolute;
+                top: -2px;
+                left: 0px;
+                width: 100%;
+                color: #fff;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .content .loginArea .checkbox-group span {
+                position: absolute;
+                top: 0;
+                left: 26px;
+                line-height: 1.1;
+                white-space: nowrap;
+            }
+
+            .content .loginArea #msg {
+                position: absolute;
+                bottom: 22px;
+            }
+
+            @media screen and (max-width: 1680px) and (max-height: 1050px) {
+                .containner {
+                    height: 945px;
+                    /*(1080*1920)*1680 = 945*/
+                }
+            }
+
+            @media screen and (max-width: 1600px) and (max-height: 900px) {
+                .containner {
+                    height: 900px;
+                }
+            }
+
+            @media screen and (max-width: 1440px) and (max-height: 900px) {
+                .containner {
+                    height: 810px;
+                }
+            }
+
+            @media screen and (max-width: 1366px) and (max-height: 768px) {
+                .containner {
+                    height: 810px;
+                }
+            }
+
+            @media screen and (max-width: 1360px) and (max-height: 768px) {
+                .containner {
+                    height: 765px;
+                }
+            }
+
+            @media screen and (max-width: 1280px) and (max-height: 800px) {
+                .containner {
+                    height: 720px;
+                }
+            }
+
+            /*不符合比例出现空白的处理方法*/
+            @media screen and (max-width: 1400px) and (max-height: 1050px) {
+                .containner {
+                    height: 944px;
+                    /*window.innerHeight = 【谷歌：944px】、【火狐：917px】、【IE11：932px】,取做最大值*/
+                }
+            }
+
+            @media screen and (max-width: 1280px) and (max-height: 918px) {
+                .containner {
+                    height: 918px;
+                }
+            }
+
+            @media screen and (max-width: 1280px) and (max-height: 854px) {
+                .containner {
+                    height: 854px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="containner">
+            <div class="content">
+                <h1>湖南医保平台项目建设管理调度平台</h1>
+                <img src="tup@2x.png" alt="" />
+                <!-- <form class="loginArea" action="${ctx}/login.do" method="post" name="loginform"> -->
+                <form class="loginArea">
+                    <nobr>
+                        <iptms:message id="err_msg" />
+                    </nobr>
+                    <h5>用户登录</h5>
+                    <input type="text" placeholder="请输入账号" />
+                    <input type="password" placeholder="请输入密码" />
+                    <label class="checkbox-group">
+                        <input type="checkbox" />
+                        <span>记住我的登陆状态</span>
+                    </label>
+                    <input type="submit" value="登录" />
+                    <p id="msg" class="msg" style="display: none;"></p>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+<!-- create by linxi -->
