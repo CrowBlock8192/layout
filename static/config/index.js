@@ -7,9 +7,7 @@
 
   // api接口请求地址
   window.SITE_CONFIG['baseUrl'] = 'http://172.16.100.110:8080/';
-  // window.SITE_CONFIG['baseUrl'] = 'http://172.16.100.29:8080/';
-  // window.SITE_CONFIG['baseUrl'] = 'http://192.168.1.246:8080';
-
+  // window.SITE_CONFIG['baseUrl'] = 'http://172.16.100.27:8080';
 
   // cdn地址 = 域名 + 版本号
   window.SITE_CONFIG['domain'] = './'; // 域名
