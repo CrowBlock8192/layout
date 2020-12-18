@@ -1,2 +1,0 @@
-webpackJsonprmsh([56],{"pvP/":function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var s={render:function(){var e=this.$createElement;return(this._self._c||e)("el-container",{staticClass:"box"},[this._v("\n    赞未开放\n")])},staticRenderFns:[]};var r=n("C7Lr")({},s,!1,function(e){n("sP5i")},"data-v-4ae13cdc",null);t.default=r.exports},sP5i:function(e,t){}});
-//# sourceMappingURL=56.ea6c4584710ba00db5ca.js.map
